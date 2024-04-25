@@ -33,7 +33,7 @@ int main(){
                 printf("Deletar contato...\n");
                 break;
             case 3:
-                erro = listar_contatos(agenda);
+                erro = listar_contatos(&pos, agenda);
                 break;
             case 4:
                 printf("Salvar contatos...\n");

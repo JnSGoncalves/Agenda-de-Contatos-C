@@ -13,6 +13,6 @@ typedef struct {
 void clearBuffer();
 
 int add_contatos(int *pos, contatos agenda[]);
-int listar_contatos(contatos agenda[]);
+int listar_contatos(int *pos, contatos agenda[]);
 
 int trat_erros(int erro);
