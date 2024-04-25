@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include "funcoes.h"
 
 int main(){
-    int pos;
+    int pos = 0;
     int opcao;
+    int erro;
+
+    contatos agenda[Total];
 
     do{
         // Menu print
@@ -20,15 +24,16 @@ int main(){
         scanf("%d", &opcao);
         printf("\n");
 
+        // Inicio funções
         switch (opcao){
             case 1:
-                printf("Criar contato...\n");
+                erro = add_contatos(&pos, agenda);
                 break;
             case 2:
                 printf("Deletar contato...\n");
                 break;
             case 3:
-                printf("Listar contato...\n");
+                erro = listar_contatos(agenda);
                 break;
             case 4:
                 printf("Salvar contatos...\n");
@@ -37,6 +42,8 @@ int main(){
                 printf("Carregar contatos...\n");
                 break;
         }
+
+        trat_erros(erro);
 
     } while(opcao != 0);
 
