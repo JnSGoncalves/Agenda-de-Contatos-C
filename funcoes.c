@@ -47,7 +47,7 @@ int del_contatos(int *pos, contatos agenda[]){
 
 	printf("Digite o número de telefone do contato que deseja excluir: ");
 	long numero;
-	scanf("%ld", numero);
+	scanf("%ld", &numero);
 
 	// Procura a posição do número no array
 	int del_pos;
