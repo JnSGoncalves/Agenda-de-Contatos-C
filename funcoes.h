@@ -1,6 +1,6 @@
 #define Total 255
 
-enum{OK, contatos_cheios};
+enum{OK, contatos_cheios, sem_contatos};
 
 typedef struct {
     char nome[Total];
@@ -13,4 +13,6 @@ typedef struct {
 void clearBuffer();
 
 int add_contatos(int *pos, contatos agenda[]);
-void listar_contatos(contatos agenda[]);
+int listar_contatos(contatos agenda[]);
+
+int trat_erros(int erro);

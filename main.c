@@ -4,6 +4,7 @@
 int main(){
     int pos = 0;
     int opcao;
+    int erro;
 
     contatos agenda[Total];
 
@@ -26,13 +27,13 @@ int main(){
         // Inicio funções
         switch (opcao){
             case 1:
-                add_contatos(&pos, agenda);
+                erro = add_contatos(&pos, agenda);
                 break;
             case 2:
                 printf("Deletar contato...\n");
                 break;
             case 3:
-                listar_contatos(agenda);
+                erro = listar_contatos(agenda);
                 break;
             case 4:
                 printf("Salvar contatos...\n");
@@ -41,6 +42,8 @@ int main(){
                 printf("Carregar contatos...\n");
                 break;
         }
+
+        trat_erros(erro);
 
     } while(opcao != 0);
 
