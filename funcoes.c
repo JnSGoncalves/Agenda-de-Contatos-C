@@ -38,6 +38,26 @@ int add_contatos(int *pos, contatos agenda[]){
     return 0;
 }
 
+// Inclua o arquivo de cabeçalho para ter acesso ao protótipo da função
+#include "funcoes.h"
+
+// Implementação da função
+void salvar_em_arquivo_binario(const char *nome_arquivo, void *dados, size_t tamanho_dados) {
+    // Abre o arquivo para escrita em modo binário
+    FILE *arquivo = fopen(nome_arquivo, "wb");
+
+    // Verifica se o arquivo foi aberto com sucesso
+    if (arquivo != NULL) {
+        // Escreve os dados no arquivo
+        fwrite(dados, tamanho_dados, 1, arquivo);
+
+        // Fecha o arquivo após a escrita
+        fclose(arquivo);
+        printf("Dados salvos com sucesso no arquivo %s\n", nome_arquivo);
+    } else {
+        printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
+    }
+}
 
 // 2. Deletar contato
 
@@ -57,6 +77,7 @@ int listar_contatos(int *pos, contatos agenda[]) {
     }
     return OK;
 }
+
 
 
 // 4. Salvar contatos

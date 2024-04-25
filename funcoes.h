@@ -16,3 +16,5 @@ int add_contatos(int *pos, contatos agenda[]);
 int listar_contatos(int *pos, contatos agenda[]);
 
 int trat_erros(int erro);
+
+void salvar_em_arquivo_binario(const char *nome_arquivo, void dados, size_t tamanho_dados);

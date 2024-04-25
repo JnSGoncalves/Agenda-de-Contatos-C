@@ -37,6 +37,7 @@ int main(){
                 break;
             case 4:
                 printf("Salvar contatos...\n");
+              salvar_em_arquivo_binario("contatos.bin", agenda, sizeof(agenda));
                 break;
             case 5:
                 printf("Carregar contatos...\n");
