@@ -40,6 +40,17 @@ int add_contatos(int *pos, contatos agenda[]){
     return 0;
 }
 
+void listar_contatos(contatos agenda[]) {
+    printf("Lista de contatos:\n\n");
+    for (int i = 0; i < Total; i++) {
+        if (strlen(agenda[i].nome) > 0)
+            printf("Nome: %s\n", agenda[i].nome);
+            printf("Sobrenome: %s\n", agenda[i].sobrenome);
+            printf("Telefone: %ld\n", agenda[i].numero);
+            printf("email: %s\n", agenda[i].email);
+    }
+}
+
 // 2. Deletar contato
 // 3. Listar contato
 // 4. Salvar contatos
