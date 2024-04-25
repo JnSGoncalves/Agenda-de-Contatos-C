@@ -1,16 +1,19 @@
 # Projeto-3
 
-Criação de uma agenda de contatos onde o usuário tem as opções de criar um contato, deletar um contato, listar todos os contatos existentes, salvar os dados em um arquivo binário e carregar os dados de um arquivo binário.
+Aqui está uma versão revisada do seu texto:
 
-1- Função de criar contatos: Quando o usuário escolher a opção 1 o programa pedirá que digite as informções do contato que quer criar e as salvará. Informações: Nome, Sobrenome, Número de telefone e email.
+Desenvolvimento de uma agenda de contatos com as seguintes funcionalidades: criação de um novo contato, exclusão de um contato existente, listagem de todos os contatos, salvamento dos dados em um arquivo binário e carregamento dos dados de um arquivo binário.
 
-2- Função de deletar contatos: Quando o usuário escolher a opção 2 o programa pedirá o número de telefone do contato salvo e o excluirá.
+1. **Criação de Contatos:** Ao selecionar a opção 1, o programa solicitará ao usuário que insira as informações do contato a ser criado, incluindo nome, sobrenome, número de telefone e e-mail. Estas informações serão então armazenadas.
 
-3- Função de listar contatos: Quando o usuário escolher a opção 3 o programa listará todos os contatos salvos, e caso não existam contatos salvos o programa voltará para a onde o usuário deve escolher uma opção. 
+2. **Exclusão de Contatos:** Ao escolher a opção 2, o programa pedirá ao usuário que insira o número de telefone do contato a ser removido, e em seguida o eliminará da agenda.
 
-4- Função de salvar arquivo binário: Quando o usuário escolher a opção 4 eles 
+3. **Listagem de Contatos:** Se a opção 3 for selecionada, o programa exibirá todos os contatos atualmente salvos. Caso não haja nenhum contato registrado, o programa retornará ao menu principal.
 
-5- Função de carregar arquivo binário: Quando o usuário escolher a opção 5
+4. **Salvamento em Arquivo Binário:** Ao escolher a opção 4, todos os dados mantidos durante a execução do programa serão armazenados em um arquivo binário.
 
-Para compilar o programa o usuário deve instalar o compilador GNU Compiler Collection, abrir a pasta do programa em uma IDE de sua preferência e utilizar o comando "gcc *.c" no terminal de seu computador.
-Para executar o programa o usuário deve utilizar dentro da IDE com o projeto aida aberto e já compilado o comando ./a.out(Linux) ou .\a.exe(Windows). 
+5. **Carregamento de Arquivo Binário:** Ao selecionar a opção 5, o programa carregará os dados previamente salvos de um arquivo binário.
+
+Para compilar o programa, o usuário deve instalar o GNU Compiler Collection, abrir a pasta do projeto em sua IDE preferida e utilizar o comando "gcc *.c" no terminal do seu computador.
+
+Para executar o programa, o usuário deve usar o comando "./a.out" (Linux) ou ".\a.exe" (Windows) dentro da IDE com o projeto aberto e já compilado.
