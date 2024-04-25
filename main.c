@@ -32,7 +32,7 @@ int main(){
                 printf("Deletar contato...\n");
                 break;
             case 3:
-                printf("Listar contato...\n");
+                listar_contatos(agenda);
                 break;
             case 4:
                 printf("Salvar contatos...\n");
