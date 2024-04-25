@@ -62,6 +62,28 @@ int listar_contatos(int *pos, contatos agenda[]) {
 // 4. Salvar contatos
 // 5. Carregar contatos
 
+// 5. Carregar contatos
+void carregar_contatos(const char *nome_arquivo, int *pos, contatos agenda[]) {
+    // Abre o arquivo para leitura em modo binário
+    FILE *arquivo = fopen(nome_arquivo, "rb");
+
+    // Verifica se o arquivo foi aberto com sucesso
+    if (arquivo != NULL) {
+        // Lê os dados do arquivo para a agenda
+        fread(agenda, sizeof(contatos), Total, arquivo);
+
+        // Determina a posição correta baseada no número de contatos lidos
+        fseek(arquivo, 0, SEEK_END);
+        *pos = ftell(arquivo) / sizeof(contatos);
+
+        // Fecha o arquivo após a leitura
+        fclose(arquivo);
+        printf("Contatos carregados com sucesso do arquivo %s\n", nome_arquivo);
+    } else {
+        printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
+    }
+}
+
 int trat_erros(int erro){
     if (erro != OK){
         if (erro == contatos_cheios){

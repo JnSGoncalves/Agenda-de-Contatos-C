@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "funcoes.h"
 
+// Protótipo da função para carregar contatos de um arquivo binário
+void carregar_contatos(const char *nome_arquivo, int *pos, contatos agenda[]);
+
 int main(){
     int pos = 0;
     int opcao;
