@@ -92,6 +92,26 @@ int listar_contatos(int *pos, contatos agenda[]) {
 
 
 // 4. Salvar contatos
+int adicionar_arquivo_binario(contatos agenda[], int pos){
+    FILE *f = fopen("tarefas.bin", "wb");
+    if(f == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return erro_abrir;
+    }
+    
+    for (int i = 0; i < pos; i++) {
+        if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
+            printf("Erro ao escrever no arquivo.\n");
+            fclose(f);
+            return erro_escrever;
+        }
+    }
+
+    fclose(f);
+    printf("Contatos salvos no arquivo binário com sucesso.\n");
+    return OK;
+}
+
 // 5. Carregar contatos
 
 int trat_erros(int erro){
@@ -105,7 +125,6 @@ int trat_erros(int erro){
 			printf("Número de telefone não encontrado\n");
 		}
 	}
-
 }
 
 void clearBuffer(){
