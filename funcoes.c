@@ -51,7 +51,7 @@ int del_contatos(int *pos, contatos agenda[]){
 
 	// Procura a posição do número no array
 	int del_pos;
-	for(del_pos = 0; del_pos > *pos;del_pos++ ){
+	for(del_pos = 0; del_pos < *pos;del_pos++ ){
 		if (agenda[del_pos].numero == numero){
 			break;
 		}
