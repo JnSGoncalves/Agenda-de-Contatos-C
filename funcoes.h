@@ -1,13 +1,12 @@
 #define Total 255
 
-
 enum{OK, contatos_cheios, sem_contatos, nu_nao_encontrado, erro_escrever, erro_fechar, erro_abrir};
 
 typedef struct {
-    char nome[Total];
-    char sobrenome[Total];
-    long numero;
-    char email[Total];
+	char nome[Total];
+	char sobrenome[Total];
+	long numero;
+	char email[Total];
 } contatos;
 
 
