@@ -15,6 +15,7 @@ void clearBuffer();
 int add_contatos(int *pos, contatos agenda[]);
 int del_contatos(int *pos, contatos agenda[]);
 int listar_contatos(int *pos, contatos agenda[]);
-int adicionar_arquivo_binario(contatos agenda[], int pos);
+int adicionar_arquivo_binario( int *pos, contatos agenda[]);
+int carregar_arquivo_binario( int *pos, contatos agenda[]);
 
 int trat_erros(int erro);

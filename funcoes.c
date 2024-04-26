@@ -98,8 +98,29 @@ int adicionar_arquivo_binario(contatos agenda[], int pos){
         printf("Erro ao abrir o arquivo.\n");
         return erro_abrir;
     }
-    
     for (int i = 0; i < pos; i++) {
+        if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
+            printf("Erro ao escrever no arquivo.\n");
+            fclose(f);
+            return erro_escrever;
+        }
+
+    }
+
+    fclose(f);
+    printf("Contatos salvos no arquivo binário com sucesso.\n");
+    return OK;
+}
+
+// 4. Salvar contatos
+int adicionar_arquivo_binario(int *pos, contatos agenda[]){
+    FILE *f = fopen("tarefas.bin", "wb");
+    if(f == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return erro_abrir;
+    }
+
+    for (int i = 0; i < *pos; i++) {
         if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
             printf("Erro ao escrever no arquivo.\n");
             fclose(f);
@@ -113,6 +134,28 @@ int adicionar_arquivo_binario(contatos agenda[], int pos){
 }
 
 // 5. Carregar contatos
+int carregar_arquivo_binario(int *pos, contatos agenda[]) {
+    FILE *f = fopen("tarefas.bin", "rb");
+    if (f == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return erro_abrir;
+    }
+
+    contatos contato;
+
+    while (fread(&contato, sizeof(contatos), 1, f) == 1) {
+        agenda[*pos] = contato;
+        (*pos)++;
+    }
+
+    fclose(f);
+    printf("Contatos carregados do arquivo binário com sucesso.\n");
+    return OK;
+}
+
+
+
+
 
 int trat_erros(int erro){
 	if (erro != OK){

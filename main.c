@@ -36,10 +36,10 @@ int main(){
                 erro = listar_contatos(&pos, agenda);
                 break;
             case 4:
-                erro = adicionar_arquivo_binario(agenda, pos);
+                erro = adicionar_arquivo_binario(&pos, agenda);
                 break;
             case 5:
-                printf("Carregar contatos...\n");
+                erro = carregar_arquivo_binario(&pos, agenda);
                 break;
         }
         trat_erros(erro);
