@@ -30,20 +30,18 @@ int main(){
                 erro = add_contatos(&pos, agenda);
                 break;
             case 2:
-                printf("Deletar contato...\n");
+                erro = del_contatos(&pos, agenda);
                 break;
             case 3:
                 erro = listar_contatos(&pos, agenda);
                 break;
             case 4:
-                printf("Salvar contatos...\n");
-              salvar_em_arquivo_binario("contatos.bin", agenda, sizeof(agenda));
+                erro = adicionar_arquivo_binario(agenda, pos);
                 break;
             case 5:
                 printf("Carregar contatos...\n");
                 break;
         }
-
         trat_erros(erro);
 
     } while(opcao != 0);
