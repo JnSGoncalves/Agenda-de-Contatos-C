@@ -35,11 +35,43 @@ int add_contatos(int *pos, contatos agenda[]){
 
     printf("\nContado adicionado com sucesso!\n");
 
-    return 0;
+    return OK;
 }
 
 
 // 2. Deletar contato
+int del_contatos(int *pos, contatos agenda[]){
+    if (*pos == 0) {
+        return sem_contatos;
+    }
+
+    printf("Digite o número de telefone do contato que deseja excluir: ");
+    long numero;
+    scanf("%ld", &numero);
+
+    // Procura a posição do número no array
+    int del_pos;
+    for(del_pos = 0; del_pos < *pos;del_pos++ ){
+        if (agenda[del_pos].numero == numero){
+            break;
+        }
+    }
+    if (del_pos == *pos || del_pos < 0){
+        return nu_nao_encontrado;
+    }
+    else{
+        for (int i = del_pos; i < *pos; i++){
+            strcpy(agenda[i].nome, agenda[i+1].nome);
+            strcpy(agenda[i].sobrenome, agenda[i+1].sobrenome);
+            agenda[i].numero = agenda[i+1].numero;
+            strcpy(agenda[i].email, agenda[i+1].email);
+        }
+        *pos = *pos - 1;
+        printf("Contato excluido!\n");
+        return OK;
+    }
+}
+
 
 // 3. Listar contato
 int listar_contatos(int *pos, contatos agenda[]) {
@@ -52,7 +84,7 @@ int listar_contatos(int *pos, contatos agenda[]) {
             printf("Nome: %s\n", agenda[i].nome);
             printf("Sobrenome: %s\n", agenda[i].sobrenome);
             printf("Telefone: %ld\n", agenda[i].numero);
-            printf("email: %s\n", agenda[i].email);
+            printf("email: %s\n\n", agenda[i].email);
         }        
     }
     return OK;
@@ -60,29 +92,49 @@ int listar_contatos(int *pos, contatos agenda[]) {
 
 
 // 4. Salvar contatos
-// 5. Carregar contatos
-
-// 5. Carregar contatos
-void carregar_contatos(const char *nome_arquivo, int *pos, contatos agenda[]) {
-    // Abre o arquivo para leitura em modo binário
-    FILE *arquivo = fopen(nome_arquivo, "rb");
-
-    // Verifica se o arquivo foi aberto com sucesso
-    if (arquivo != NULL) {
-        // Lê os dados do arquivo para a agenda
-        fread(agenda, sizeof(contatos), Total, arquivo);
-
-        // Determina a posição correta baseada no número de contatos lidos
-        fseek(arquivo, 0, SEEK_END);
-        *pos = ftell(arquivo) / sizeof(contatos);
-
-        // Fecha o arquivo após a leitura
-        fclose(arquivo);
-        printf("Contatos carregados com sucesso do arquivo %s\n", nome_arquivo);
-    } else {
-        printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
+int adicionar_arquivo_binario(int *pos, contatos agenda[]){
+    FILE *f = fopen("tarefas.bin", "wb");
+    if(f == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return erro_abrir;
     }
+
+    for (int i = 0; i < *pos; i++) {
+        if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
+            printf("Erro ao escrever no arquivo.\n");
+            fclose(f);
+            return erro_escrever;
+        }
+    }
+
+    fclose(f);
+    printf("Contatos salvos no arquivo binário com sucesso.\n");
+    return OK;
 }
+
+// 5. Carregar contatos
+int carregar_arquivo_binario(int *pos, contatos agenda[]) {
+    FILE *f = fopen("tarefas.bin", "rb");
+    if (f == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return erro_abrir;
+    }
+
+    contatos contato;
+
+    while (fread(&contato, sizeof(contatos), 1, f) == 1) {
+        agenda[*pos] = contato;
+        (*pos)++;
+    }
+
+    fclose(f);
+    printf("Contatos carregados do arquivo binário com sucesso.\n");
+    return OK;
+}
+
+
+
+
 
 int trat_erros(int erro){
     if (erro != OK){
@@ -90,10 +142,12 @@ int trat_erros(int erro){
             printf("Agenda lotada!\n");
             printf("Exclua algum contato para adicionar mais!.\n");
         }else if (erro == sem_contatos){
-            
+            printf("Não existem contatos cadastrados.\n");
+        }else if (erro == nu_nao_encontrado){
+            printf("Número de telefone não encontrado\n");
         }
     }
-    
+
 }
 
 void clearBuffer(){

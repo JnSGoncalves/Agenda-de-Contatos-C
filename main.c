@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "funcoes.h"
 
-// Protótipo da função para carregar contatos de um arquivo binário
-void carregar_contatos(const char *nome_arquivo, int *pos, contatos agenda[]);
-
 int main(){
     int pos = 0;
     int opcao;
@@ -33,19 +30,18 @@ int main(){
                 erro = add_contatos(&pos, agenda);
                 break;
             case 2:
-                printf("Deletar contato...\n");
+                erro = del_contatos(&pos, agenda);
                 break;
             case 3:
                 erro = listar_contatos(&pos, agenda);
                 break;
             case 4:
-                printf("Salvar contatos...\n");
+                erro = adicionar_arquivo_binario(&pos, agenda);
                 break;
             case 5:
-                printf("Carregar contatos...\n");
+                erro = carregar_arquivo_binario(&pos, agenda);
                 break;
         }
-
         trat_erros(erro);
 
     } while(opcao != 0);
