@@ -22,26 +22,26 @@ int main(){
         // Opção menu
         printf("Digite o número da opção desejada: ");
         scanf("%d", &opcao);
+        
         printf("\n");
 
         // Inicio funções
-        switch (opcao){
-            case 1:
+        if (opcao != 0){
+            if (opcao == 1){
                 erro = add_contatos(&pos, agenda);
-                break;
-            case 2:
+            }else if (opcao == 2){
                 erro = del_contatos(&pos, agenda);
-                break;
-            case 3:
+            }else if (opcao == 3){
                 erro = listar_contatos(&pos, agenda);
-                break;
-            case 4:
+            }else if (opcao == 4){
                 erro = adicionar_arquivo_binario(&pos, agenda);
-                break;
-            case 5:
+            }else if (opcao == 5){
                 erro = carregar_arquivo_binario(&pos, agenda);
-                break;
+            }else {
+                printf("Opção Inválida!");
+            }
         }
+        
         trat_erros(erro);
 
     } while(opcao != 0);
