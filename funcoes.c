@@ -1,10 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include "funcoes.h"
 
+long ver_numero(){
+    long numero;
+
+	if (scanf("%ld", &numero) != 1) {
+        printf("Entrada inválida. Digite apenas números.\n");
+		clearBuffer();
+		return nao_e_numero;       
+    }
+
+	if (numero <= 0) {
+        printf("Entrada inválida.\n");
+        return nao_e_numero;
+    }
+
+    return numero;
+};
+
 // 1. Criar contato
-// Erro ao mudar o valor da posição
 int add_contatos(int *pos, contatos agenda[]){
 	if (*pos >= Total){
 		return contatos_cheios;
@@ -22,8 +39,12 @@ int add_contatos(int *pos, contatos agenda[]){
 	fgets(agenda[*pos].sobrenome, Total, stdin);
 	agenda[*pos].sobrenome[strcspn(agenda[*pos].sobrenome, "\n")] = '\0';
 
-	printf("Número de Telefone (DDD+Número - 15994204917): ");
-	scanf("%ld", &agenda[*pos].numero);
+	long ver;
+	do{
+		printf("Número de Telefone (DDD+Número - 15994204917): ");
+		ver = ver_numero();
+	}while (ver == nao_e_numero || ver == erro_conversao);
+	agenda[*pos].numero = ver;
 
 	clearBuffer();
 
@@ -45,9 +66,13 @@ int del_contatos(int *pos, contatos agenda[]){
 		return sem_contatos;
 	}
 
-	printf("Digite o número de telefone do contato que deseja excluir: ");
-	long numero;
-	scanf("%ld", &numero);
+	long ver;
+	do{
+		printf("Digite o número de telefone do contato que deseja excluir: ");
+		ver = ver_numero();
+	}while (ver == nao_e_numero || ver == erro_conversao);
+	long numero = ver;
+
 
 	// Procura a posição do número no array
 	int del_pos;
