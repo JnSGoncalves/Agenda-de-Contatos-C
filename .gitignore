@@ -1,3 +1,6 @@
+# Arquivos de salvamento de dados
+*.bin
+
 # Prerequisites
 *.d
 

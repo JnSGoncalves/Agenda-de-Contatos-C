@@ -90,39 +90,15 @@ int listar_contatos(int *pos, contatos agenda[]) {
 	return OK;
 }
 
-
-// 4. Salvar contatos
-int adicionar_arquivo_binario(contatos agenda[], int pos){
-    FILE *f = fopen("tarefas.bin", "wb");
-    if(f == NULL){
-        printf("Erro ao abrir o arquivo.\n");
-        return erro_abrir;
-    }
-    for (int i = 0; i < pos; i++) {
-        if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
-            printf("Erro ao escrever no arquivo.\n");
-            fclose(f);
-            return erro_escrever;
-        }
-
-    }
-
-    fclose(f);
-    printf("Contatos salvos no arquivo binário com sucesso.\n");
-    return OK;
-}
-
 // 4. Salvar contatos
 int adicionar_arquivo_binario(int *pos, contatos agenda[]){
     FILE *f = fopen("tarefas.bin", "wb");
     if(f == NULL){
-        printf("Erro ao abrir o arquivo.\n");
         return erro_abrir;
     }
 
     for (int i = 0; i < *pos; i++) {
         if (fwrite(&agenda[i], sizeof(contatos), 1, f) != 1) {
-            printf("Erro ao escrever no arquivo.\n");
             fclose(f);
             return erro_escrever;
         }
@@ -137,26 +113,25 @@ int adicionar_arquivo_binario(int *pos, contatos agenda[]){
 int carregar_arquivo_binario(int *pos, contatos agenda[]) {
     FILE *f = fopen("tarefas.bin", "rb");
     if (f == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
         return erro_abrir;
     }
 
     contatos contato;
 
+	int pos_load = 0;
     while (fread(&contato, sizeof(contatos), 1, f) == 1) {
-        agenda[*pos] = contato;
-        (*pos)++;
+        agenda[pos_load] = contato;
+        (pos_load)++;
     }
+
+	*pos = pos_load;
 
     fclose(f);
     printf("Contatos carregados do arquivo binário com sucesso.\n");
     return OK;
 }
 
-
-
-
-
+// OK, contatos_cheios, sem_contatos, nu_nao_encontrado, erro_escrever, erro_fechar, erro_abrir
 int trat_erros(int erro){
 	if (erro != OK){
 		if (erro == contatos_cheios){
@@ -166,6 +141,12 @@ int trat_erros(int erro){
 			printf("Não existem contatos cadastrados.\n");
 		}else if (erro == nu_nao_encontrado){
 			printf("Número de telefone não encontrado\n");
+		}else if (erro == erro_escrever){
+			printf("Erro ao salvar arquivo binário!\n");
+		}else if (erro == erro_fechar){
+			printf("Erro ao fechar arquivo binário!\n");
+		}else if (erro == erro_abrir){
+			printf("Erro ao abrir arquivo binário!");
 		}
 	}
 }
