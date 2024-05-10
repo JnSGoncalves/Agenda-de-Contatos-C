@@ -1,7 +1,5 @@
 # Projeto-3
 
-Aqui está uma versão revisada do seu texto:
-
 Desenvolvimento de uma agenda de contatos com as seguintes funcionalidades: criação de um novo contato, exclusão de um contato existente, listagem de todos os contatos, salvamento dos dados em um arquivo binário e carregamento dos dados de um arquivo binário.
 
 1. **Criação de Contatos:** Ao selecionar a opção 1, o programa solicitará ao usuário que insira as informações do contato a ser criado, incluindo nome, sobrenome, número de telefone e e-mail. Estas informações serão então armazenadas.
