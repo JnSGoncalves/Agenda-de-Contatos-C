@@ -68,11 +68,11 @@ int main() {
                 erro = carregar_arquivo_binario(&posPessoal, agendaPessoal, "contatos_pessoais.bin");
                 trat_erros(erro);
                 erro = carregar_arquivo_binario(&posTrabalho, agendaTrabalho, "contatos_trabalho.bin");
-            } else if (opcao == 0){
-                erro = OK;
             } else {
                 printf("Opção Inválida!");
             }
+        } else{
+            erro = OK;
         }
 
         trat_erros(erro);
