@@ -2,10 +2,10 @@
 #include <string.h>
 #include "funcoes.h"
 
-long ver_numero() {
-    long numero;
+long long ver_numero() {
+    long long numero;
 
-    if (scanf("%ld", &numero) != 1) {
+    if (scanf("%lld", &numero) != 1) {
         printf("Entrada inválida. Digite apenas números.\n");
         clearBuffer();
         return nao_e_numero;
@@ -37,7 +37,7 @@ int add_contatos(int *pos, contatos agenda[]) {
     fgets(agenda[*pos].sobrenome, Total, stdin);
     agenda[*pos].sobrenome[strcspn(agenda[*pos].sobrenome, "\n")] = '\0';
 
-    long ver;
+    long long ver;
     do {
         printf("Número de Telefone (DDD+Número - 15994204917): ");
         ver = ver_numero();
@@ -63,12 +63,12 @@ int del_contatos(int *pos, contatos agenda[]) {
         return sem_contatos;
     }
 
-    long ver;
+    long long ver;
     do {
         printf("Digite o número de telefone do contato que deseja excluir: ");
         ver = ver_numero();
     } while (ver == nao_e_numero || ver == erro_conversao);
-    long numero = ver;
+    long long numero = ver;
 
     // Procura a posição do número no array
     int del_pos;
@@ -102,7 +102,7 @@ int listar_contatos(int *pos, contatos agenda[]) {
         if (strlen(agenda[i].nome) > 0) {
             printf("Nome: %s\n", agenda[i].nome);
             printf("Sobrenome: %s\n", agenda[i].sobrenome);
-            printf("Telefone: %ld\n", agenda[i].numero);
+            printf("Telefone: %lld\n", agenda[i].numero);
             printf("Email: %s\n\n", agenda[i].email);
         }
     }
