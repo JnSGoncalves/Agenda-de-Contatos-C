@@ -164,7 +164,72 @@ int listar_contatos(int *pos, contatos agenda[]) {
     return OK;
 }
 
-// 4. Salvar contatos
+int editar_contatos(int *pos, contatos agenda[]){
+    printf("Editar contato:\n\n");
+
+    long long ver;
+    do {
+        printf("Digite o número de telefone do contato que deseja editar: \n");
+        ver = ver_numero();
+    } while (ver == nao_e_numero || ver == erro_conversao);
+    long long numero = ver;
+
+    clearBuffer();
+
+    int index_cont = -1;
+    for(int i = 0; i < *pos; i++){
+        if (agenda[i].numero == numero){
+            index_cont = i;
+            break;
+        }
+    }
+
+    if (index_cont == -1){
+        return nu_nao_encontrado;
+    }
+
+    printf("Digite os novos dados:\n\n");
+
+    printf("Nome (antigo: %s): ", agenda[index_cont].nome);
+    fgets(agenda[index_cont].nome, Total, stdin);
+    agenda[index_cont].nome[strcspn(agenda[index_cont].nome, "\n")] = '\0';
+
+    printf("Sobrenome (antigo: %s): ", agenda[index_cont].sobrenome);
+    fgets(agenda[index_cont].sobrenome, Total, stdin);
+    agenda[index_cont].sobrenome[strcspn(agenda[index_cont].sobrenome, "\n")] = '\0';
+
+    ver = -1;
+	do{
+		printf("Número de Telefone (antigo: %lld): ", agenda[index_cont].numero);
+		ver = ver_numero();
+        if (numero_existe(ver, &index_cont, agenda)) {
+            printf("Número de telefone já existe. Digite um número único.\n");
+            ver = nao_e_numero;
+        }
+	}while (ver == nao_e_numero || ver == erro_conversao);
+	agenda[index_cont].numero = ver;
+
+    clearBuffer();
+
+    int val_email;
+    char email[Total];
+    do{
+        printf("Email (antigo: %s): ", agenda[index_cont].email);
+        fgets(email, Total, stdin);
+        email[strcspn(email, "\n")] = '\0';
+        val_email = validar_email(email);
+        if (val_email != 1){
+            printf("Email inválido.\n");
+        }
+    }while (val_email != 1);
+	strcpy(agenda[index_cont].email, email);
+
+    printf("Contato editado com sucesso!\n");
+
+    return OK;
+}
+
+// 5. Salvar contatos
 int adicionar_arquivo_binario(int *pos, contatos agenda[], const char* filename) {
     FILE *f = fopen(filename, "wb");
     if (f == NULL) {
@@ -183,7 +248,7 @@ int adicionar_arquivo_binario(int *pos, contatos agenda[], const char* filename)
     return OK;
 }
 
-// 5. Carregar contatos
+// 6. Carregar contatos
 int carregar_arquivo_binario(int *pos, contatos agenda[], const char* filename) {
     FILE *f = fopen(filename, "rb");
     if (f == NULL) {
