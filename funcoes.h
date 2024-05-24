@@ -19,5 +19,5 @@ int del_contatos(int *pos, contatos agenda[]);
 int listar_contatos(int *pos, contatos agenda[]);
 int adicionar_arquivo_binario(int *pos, contatos agenda[]);
 int carregar_arquivo_binario(int *pos, contatos agenda[]);
-
+int numero_existe(long numero, int *pos, contatos agenda[]);
 int trat_erros(int erro);

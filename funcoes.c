@@ -2,6 +2,15 @@
 #include <string.h>
 #include "funcoes.h"
 
+int numero_existe(long numero, int *pos, contatos agenda[]) {
+    for (int i = 0; i < *pos; i++) {
+        if (agenda[i].numero == numero) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 long ver_numero(){
     long numero;
 
@@ -41,6 +50,10 @@ int add_contatos(int *pos, contatos agenda[]){
 	do{
 		printf("Número de Telefone (DDD+Número - 15994204917): ");
 		ver = ver_numero();
+        if (numero_existe(ver, pos, agenda)) {
+            printf("Número de telefone já existe. Digite um número único.\n");
+            ver = nao_e_numero;
+        }
 	}while (ver == nao_e_numero || ver == erro_conversao);
 	agenda[*pos].numero = ver;
 
