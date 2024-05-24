@@ -71,11 +71,13 @@ int main() {
             } else {
                 printf("Opção Inválida!");
             }
+        } else{
+            erro = OK;
         }
 
         trat_erros(erro);
 
     } while (opcao != 0);
 
-    printf("\nEncerrando programa...");
+    printf("\nEncerrando programa...\n");
 }
