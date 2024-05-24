@@ -2,6 +2,35 @@
 #include <string.h>
 #include "funcoes.h"
 
+int validar_email(char *email){
+	char *character = email;
+
+	int ver_arroba;
+	int ver_ponto;
+	while (*character != '\0'){
+		if (*character == '@' && *(character + 1) != '.'){
+			if (ver_arroba == 1){
+				return 0;
+			}
+			ver_arroba = 1;
+
+		}else if (*character == '.' && ver_arroba == 1 && *(character - 1) != '@' && *(character + 1) != '\0'){
+			if (ver_ponto){
+				return 0;
+			}
+			ver_ponto = 1;
+		}
+
+		(character)++;
+	}
+
+	if (ver_arroba && ver_ponto){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 long long ver_numero() {
     long long numero;
 
@@ -46,9 +75,14 @@ int add_contatos(int *pos, contatos agenda[]) {
 
     clearBuffer();
 
+	char email[Total];
     printf("Email: ");
-    fgets(agenda[*pos].email, Total, stdin);
-    agenda[*pos].email[strcspn(agenda[*pos].email, "\n")] = '\0';
+    fgets(email, Total, stdin);
+    email[strcspn(email, "\n")] = '\0';
+	if (validar_email(email) != 1){
+		return email_invalido;
+	}
+	strcpy(agenda[*pos].email, email);
 
     *pos = *pos + 1;
 
@@ -166,7 +200,9 @@ int trat_erros(int erro) {
             printf("Erro ao fechar arquivo binário!\n");
         } else if (erro == erro_abrir) {
             printf("Erro ao abrir arquivo binário!\n");
-        }
+        } else if (erro == email_invalido) {
+			printf("Email inválido!\n");
+		}
     }
     return erro;
 }
