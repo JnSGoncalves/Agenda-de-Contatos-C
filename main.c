@@ -15,9 +15,10 @@ int main() {
         printf("\nAgenda de contatos\n\n");
         printf("1. Criar contato\n");
         printf("2. Deletar contato\n");
-        printf("3. Listar contato\n");
-        printf("4. Salvar contatos\n");
-        printf("5. Carregar contatos\n");
+        printf("3. Listar contatos\n");
+        printf("4. Editar contato\n");
+        printf("5. Salvar contatos\n");
+        printf("6. Carregar contatos\n");
         printf("0. Sair\n\n");
 
         // Opção menu
@@ -25,7 +26,7 @@ int main() {
         scanf("%d", &opcao);
         printf("\n");
 
-        if (opcao != 0 && opcao != 4 && opcao != 5) {
+        if (opcao != 0 && opcao != 5 && opcao != 6) {
             printf("Escolha o tipo de contato:\n");
             printf("1. Pessoal\n");
             printf("2. Trabalho\n");
@@ -52,7 +53,7 @@ int main() {
                 } else {
                     printf("Opção Inválida!");
                 }
-            } else if (opcao == 3) {
+            } else if (opcao == 3){
                 if (tipo == 1) {
                     erro = listar_contatos(&posPessoal, agendaPessoal);
                 } else if (tipo == 2) {
@@ -61,10 +62,18 @@ int main() {
                     printf("Opção Inválida!");
                 }
             } else if (opcao == 4) {
+                if (tipo == 1) {
+                    erro = editar_contatos(&posPessoal, agendaPessoal);
+                } else if (tipo == 2) {
+                    erro = editar_contatos(&posTrabalho, agendaTrabalho);
+                } else {
+                    printf("Opção Inválida!");
+                }
+            } else if (opcao == 5) {
                 erro = adicionar_arquivo_binario(&posPessoal, agendaPessoal, "contatos_pessoais.bin");
                 trat_erros(erro);
                 erro = adicionar_arquivo_binario(&posTrabalho, agendaTrabalho, "contatos_trabalho.bin");
-            } else if (opcao == 5) {
+            } else if (opcao == 6) {
                 erro = carregar_arquivo_binario(&posPessoal, agendaPessoal, "contatos_pessoais.bin");
                 trat_erros(erro);
                 erro = carregar_arquivo_binario(&posTrabalho, agendaTrabalho, "contatos_trabalho.bin");
