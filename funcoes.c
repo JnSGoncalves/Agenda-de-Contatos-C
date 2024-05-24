@@ -77,13 +77,17 @@ int add_contatos(int *pos, contatos agenda[]) {
 
     clearBuffer();
 
-	char email[Total];
-    printf("Email: ");
-    fgets(email, Total, stdin);
-    email[strcspn(email, "\n")] = '\0';
-	if (validar_email(email) != 1){
-		return email_invalido;
-	}
+    int val_email;
+    char email[Total];
+    do{
+        printf("Email: ");
+        fgets(email, Total, stdin);
+        email[strcspn(email, "\n")] = '\0';
+        val_email = validar_email(email);
+        if (val_email != 1){
+            printf("Email inválido.\n");
+        }
+    }while (val_email != 1);
 	strcpy(agenda[*pos].email, email);
 
     *pos = *pos + 1;
@@ -202,9 +206,7 @@ int trat_erros(int erro) {
             printf("Erro ao fechar arquivo binário!\n");
         } else if (erro == erro_abrir) {
             printf("Erro ao abrir arquivo binário!\n");
-        } else if (erro == email_invalido) {
-			printf("Email inválido!\n");
-		}
+        }
     }
     return erro;
 }

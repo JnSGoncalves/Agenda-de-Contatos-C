@@ -79,5 +79,5 @@ int main() {
 
     } while (opcao != 0);
 
-    printf("\nEncerrando programa...");
+    printf("\nEncerrando programa...\n");
 }
