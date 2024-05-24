@@ -5,8 +5,8 @@
 int validar_email(char *email){
 	char *character = email;
 
-	int ver_arroba;
-	int ver_ponto;
+	int ver_arroba = 0;
+	int ver_ponto = 0;
 	while (*character != '\0'){
 		if (*character == '@' && *(character + 1) != '.'){
 			if (ver_arroba == 1){
