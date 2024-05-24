@@ -1,6 +1,6 @@
 #define Total 255
 
-enum{OK, contatos_cheios, sem_contatos, nu_nao_encontrado, erro_escrever, erro_fechar, erro_abrir, nao_e_numero, erro_conversao};
+enum{OK, contatos_cheios, sem_contatos, nu_nao_encontrado, erro_escrever, erro_fechar, erro_abrir, nao_e_numero, erro_conversao, email_invalido};
 
 typedef struct {
 	char nome[Total];
@@ -12,6 +12,7 @@ typedef struct {
 
 void clearBuffer();
 
+int validar_email(char *email);
 long long ver_numero();
 
 int add_contatos(int *pos, contatos agenda[]);

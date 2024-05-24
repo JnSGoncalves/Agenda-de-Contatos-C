@@ -2,6 +2,37 @@
 #include <string.h>
 #include "funcoes.h"
 
+int validar_email(char *email){
+	char *character = email;
+
+	int ver_arroba = 0;
+	int ver_ponto = 0;
+	while (*character != '\0'){
+		if (*character == '@' && *(character + 1) != '.'){
+			if (ver_arroba == 1){
+				return 0;
+			}
+			ver_arroba = 1;
+
+		}else if (*character == '.' && *(character - 1) != '@' && *(character + 1) != '\0'){
+			if (ver_ponto == 1 || *(character + 1) == '@' || *(character + 1) == '.'){
+				return 0;
+			}
+			if (ver_arroba == 1){
+				ver_ponto = 1;
+			}
+		}
+
+		(character)++;
+	}
+
+	if (ver_arroba && ver_ponto){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 long long ver_numero() {
     long long numero;
 
@@ -46,9 +77,18 @@ int add_contatos(int *pos, contatos agenda[]) {
 
     clearBuffer();
 
-    printf("Email: ");
-    fgets(agenda[*pos].email, Total, stdin);
-    agenda[*pos].email[strcspn(agenda[*pos].email, "\n")] = '\0';
+    int val_email;
+    char email[Total];
+    do{
+        printf("Email: ");
+        fgets(email, Total, stdin);
+        email[strcspn(email, "\n")] = '\0';
+        val_email = validar_email(email);
+        if (val_email != 1){
+            printf("Email inválido.\n");
+        }
+    }while (val_email != 1);
+	strcpy(agenda[*pos].email, email);
 
     *pos = *pos + 1;
 
