@@ -14,11 +14,13 @@ int validar_email(char *email){
 			}
 			ver_arroba = 1;
 
-		}else if (*character == '.' && ver_arroba == 1 && *(character - 1) != '@' && *(character + 1) != '\0'){
-			if (ver_ponto){
+		}else if (*character == '.' && *(character - 1) != '@' && *(character + 1) != '\0'){
+			if (ver_ponto == 1 || *(character + 1) == '@' || *(character + 1) == '.'){
 				return 0;
 			}
-			ver_ponto = 1;
+			if (ver_arroba == 1){
+				ver_ponto = 1;
+			}
 		}
 
 		(character)++;
